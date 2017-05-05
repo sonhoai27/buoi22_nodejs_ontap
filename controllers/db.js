@@ -37,8 +37,13 @@ function queryDB(sql, arrayData) {
 const getAllNote = () => (
     queryDB('SELECT * FROM public."NOTE"', []).then(kq => kq.rows)
 )
+const ThemData = (note) => {
+    sql = `insert into public."NOTE" ("NoiDung") Values($1) RETURING *`
+    return queryDB(sql, [note])
+}
 // queryDB('SELECT * FROM public."NOTE"', []).then(kq => console.log(kq))
 module.exports = {
     queryDB,
-    getAllNote
+    getAllNote,
+    ThemData
 };
