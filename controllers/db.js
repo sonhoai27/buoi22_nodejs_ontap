@@ -35,15 +35,26 @@ function queryDB(sql, arrayData) {
 }
 
 const getAllNote = () => (
-    queryDB('SELECT * FROM public."NOTE"', []).then(kq => kq.rows)
+    queryDB('SELECT * FROM public."NOTE"  ORDER BY "Id" DESC', []).then(kq => kq.rows)
 )
 const ThemData = (note) => {
-    sql = `insert into public."NOTE" ("NoiDung") Values($1) RETURING *`
+    sql = `insert into public."NOTE" ("NoiDung") Values($1) RETURNING *`
     return queryDB(sql, [note])
+}
+function removeNote(id) {
+    const sql = 'DELETE FROM public."NOTE" WHERE "Id" = $1';
+    return queryDB(sql, [id]);
+}
+
+function updateNote(id, note) {
+    const sql = 'UPDATE public."NOTE" SET "NoiDung" = $1 WHERE "Id" = $2';
+    return queryDB(sql, [note, id]);
 }
 // queryDB('SELECT * FROM public."NOTE"', []).then(kq => console.log(kq))
 module.exports = {
     queryDB,
     getAllNote,
-    ThemData
+    ThemData,
+    removeNote,
+    updateNote
 };

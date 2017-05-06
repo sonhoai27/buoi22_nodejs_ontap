@@ -9,6 +9,7 @@ const InsertNote = (note) => {
     };
 
     return fetch('http://localhost:3000/insert', option)
+    .then(res => res.json()) //goi ve dang json, goi ve gi, thi lay ve gi
 }
 
 export default InsertNote

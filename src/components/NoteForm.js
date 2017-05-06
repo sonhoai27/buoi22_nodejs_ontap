@@ -6,12 +6,12 @@ const styles = {
 export default class NoteForm extends Component {
     onSubmit(e) {
         e.preventDefault();
-        // const { onAdd } = this.props;
+        const { onAdd } = this.props; //lay ra
         InsertNote(this.refs.textNote.value)
-        .then(resJSON => console.log('Tham_Thanh_Cong'));
-        console.log(this.refs.textNote.value)
+        .then(resJSON => onAdd(resJSON));
         this.refs.textNote.value = '';
     }
+
     render() {
         return (
             <div>
